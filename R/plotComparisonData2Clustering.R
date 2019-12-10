@@ -18,24 +18,10 @@ plotComparisonData2Clustering <- function(compare_tibble,
   
   if (is.null(expr_breaks)) {
     expr_breaks <- defineBreaks(col_pal_expr)
-    
-    # palette_length_expr <- length(col_pal_expr)
-    # 
-    # expr_breaks <- c(
-    #   seq(-1, 0, length.out = ceiling(palette_length_expr / 2) + 1),
-    #   seq(1 / palette_length_expr, 1, length.out = floor(palette_length_expr / 2))
-    # )
   }
   
   if (is.null(sim_breaks)){
     sim_breaks <- defineBreaks(col_pal_sim)
-    
-    # palette_length_sim <- length(col_pal_sim)
-    # 
-    # sim_breaks <- c(
-    #   seq(-1, 0, length.out = ceiling(palette_length_expr / 2) + 1),
-    #   seq(1 / palette_length_expr, 1, length.out = floor(palette_length_expr / 2))
-    # )
   }
   
   # The directory we will save the plots to

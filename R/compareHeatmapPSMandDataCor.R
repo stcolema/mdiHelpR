@@ -3,35 +3,21 @@
 #' @importFrom pheatmap pheatmap
 #' @export
 compareHeatmapPSMandDataCor <- function(...,
-                                            save_name = "joint_heatmaps.png",
-                                            main = "compare_heatmaps",
-                                            col_pal_sim = grDevices::colorRampPalette(c("#FF9900", "white", "#146EB4"))(100),
-                                            col_pal_expr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
-                                            expr_breaks = NULL,
-                                            sim_breaks = NULL,
-                                            font_size = 20,
-                                            show_row_labels = FALSE,
-                                            show_col_labels = FALSE) {
+                                        save_name = "joint_heatmaps.png",
+                                        main = "compare_heatmaps",
+                                        col_pal_sim = grDevices::colorRampPalette(c("#FF9900", "white", "#146EB4"))(100),
+                                        col_pal_expr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
+                                        expr_breaks = NULL,
+                                        sim_breaks = NULL,
+                                        font_size = 20,
+                                        show_row_labels = FALSE,
+                                        show_col_labels = FALSE) {
   if (is.null(expr_breaks)) {
     expr_breaks <- defineBreaks(col_pal_expr)
-    
-    # palette_length_expr <- length(col_pal_expr)
-    # 
-    # expr_breaks <- c(
-    #   seq(-1, 0, length.out = ceiling(palette_length_expr / 2) + 1),
-    #   seq(1 / palette_length_expr, 1, length.out = floor(palette_length_expr / 2))
-    # )
   }
   
   if (is.null(sim_breaks)){
     sim_breaks <- defineBreaks(col_pal_sim)
-    
-    # palette_length_sim <- length(col_pal_sim)
-    # 
-    # sim_breaks <- c(
-    #   seq(-1, 0, length.out = ceiling(palette_length_expr / 2) + 1),
-    #   seq(1 / palette_length_expr, 1, length.out = floor(palette_length_expr / 2))
-    # )
   }
 
   # Contain ellipsis (...) in a list and find its length
