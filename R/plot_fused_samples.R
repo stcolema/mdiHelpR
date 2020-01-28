@@ -110,7 +110,8 @@ fused_gene_heatmaps <- function(expression_data_lst,
         annotation_data <- probes_present_dt %>% 
           dplyr::select(dplyr::one_of(c(d_i, d_j))) %>% 
           as.data.frame() %>% 
-          magrittr::set_rownames(probes_present_dt$Gene_names)
+          magrittr::set_rownames(row.names(new_expression_data))
+          # magrittr::set_rownames(probes_present_dt$Gene_names)
         
         annotation_data[! annotation_data] <- "Empty"
         annotation_data[annotation_data == T] <- "Present"
@@ -139,10 +140,10 @@ fused_gene_heatmaps <- function(expression_data_lst,
       if (sum(fused_ind) > 1) {
         
         
-        if(nrow(new_expression_data) > 50){
+        if(sum(fused_ind) > 50){
           show_row_labels <- F
         }
-        
+
         pheatmap::pheatmap(new_expression_data[fused_ind, ],
           cluster_cols = F,
           gaps_col = length(col_order_1),
@@ -162,6 +163,10 @@ fused_gene_heatmaps <- function(expression_data_lst,
           # We have to do some odd things we extract a single entry - types 
           # change and info is lost as a result
           rel_gene <- row.names(new_expression_data)[fused_ind]
+          
+          # As we select only a single point we have to redeclare the row name 
+          # (R hates selecting a single row)
+          row.names(fused_annotation_data) <- rel_gene
           
           curr_data <- new_expression_data[fused_ind, ] %>%
             t() %>%
