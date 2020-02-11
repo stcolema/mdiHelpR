@@ -45,17 +45,14 @@ plotComparisonCorrelationPSMData <- function(compare_tibble,
     curr_sim <- compare_tibble$similarity_matrix[compare_tibble$dataset == curr_dataset][[1]]
     curr_expr <- compare_tibble$expression_data[compare_tibble$dataset == curr_dataset][[1]]
     curr_corr <- compare_tibble$correlation_matrix[compare_tibble$dataset == curr_dataset][[1]] 
-    # curr_corr <- curr_expr %>%
-    #   t() %>%
-    #   cor()
-    
-    heatmap_wrapper_sim_expr_corr(curr_sim,
-                                  curr_expr,
-                                  curr_corr,
-                                  ph_title = curr_title,
-                                  save_name = comp_plot_name,
-                                  col_pal_sim = col_pal_sim,
-                                  col_pal_expr = col_pal_expr
+
+    heatmapWrapperPSMDataCorr(curr_sim,
+                              curr_expr,
+                              curr_corr,
+                              ph_title = curr_title,
+                              save_name = comp_plot_name,
+                              col_pal_sim = col_pal_sim,
+                              col_pal_expr = col_pal_expr
     )
   }
 }

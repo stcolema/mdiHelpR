@@ -24,22 +24,33 @@ heatmapWrapperPSMDataCorr <- function(sim_mat,
   }
   
   # This is an inefficient method as we are only interested in the clustering
-  ph_sim <- pheatmap::pheatmap(sim_mat)
+  # ph_sim <- pheatmap::pheatmap(sim_mat)
   
   # Extract the order from the pheatmap
-  row_order <- ph_sim$tree_row$order
+  # row_order <- ph_sim$tree_row$order
+  row_order <- hclust(dist(sim_mat))$order
+  
+  # if(any(row_order_2 != row_order)){
+    # stop("Disagreement between row orders.")
+  # }
   
   if(expr_col_order){
     # Extract column order for expression data
-    ph_expr <- pheatmap::pheatmap(expr_mat, cluster_rows = F)
-    expr_col_order <- ph_expr$tree_col$order
+    # ph_expr <- pheatmap::pheatmap(expr_mat, cluster_rows = F)
+    # expr_col_order <- ph_expr$tree_col$order
+    col_order <- hclust(dist(t(expr_mat)))$order
+    
+    # if(any(expr_col_order != col_order)){
+    #   stop("Disagreement between column orders.")
+    # }
   } else {
     expr_col_order <- ph_sim$tree_col$order
+    col_order <- hclust(dist(t(sim_mat)))$order
   }
   
   # Re order the matrices to have a common row order
   sim_mat <- sim_mat[row_order, row_order]
-  expr_mat <- expr_mat[row_order, expr_col_order]
+  expr_mat <- expr_mat[row_order, col_order]
   corr_mat <- corr_mat[row_order, row_order]
   
   colnames(sim_mat) <- NULL
