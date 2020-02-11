@@ -42,7 +42,7 @@ makeESSPlots <- function(mcmc_lst,
   
   # The vector of plot titles
   if(is.null(plot_titles)){
-    plot_titles <- paste("chain", 1:n_chains)
+    plot_titles <- paste("Chain", 1:n_chains)
   }
   ess_titles <- paste0(plot_titles, ": ", gen_ess_title)
   
