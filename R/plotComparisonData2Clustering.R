@@ -48,18 +48,20 @@ plotComparisonData2Clustering <- function(compare_tibble,
     curr_expr <- compare_tibble$expression_data[compare_tibble$dataset == curr_dataset][[1]]
     
     # This is an inefficient method as we are only interested in the clustering
-    ph_sim <- pheatmap::pheatmap(curr_sim)
+    # ph_sim <- pheatmap::pheatmap(curr_sim)
     
     # Extract the order from the pheatmap
-    row_order <- ph_sim$tree_row$order
+    # row_order <- ph_sim$tree_row$order
+    row_order <- hclust(dist(curr_sim))$order
     
     # Find the column order for the expression data
-    ph_expr <- pheatmap::pheatmap(curr_expr, cluster_rows = F)
-    expr_col_order <- ph_expr$tree_col$order
+    # ph_expr <- pheatmap::pheatmap(curr_expr, cluster_rows = F)
+    # expr_col_order <- ph_expr$tree_col$order
+    col_order <- hclust(dist(t(curr_expr)))$order
     
     # Re order the matrices to have a common row order
     curr_sim <- curr_sim[row_order, row_order]
-    curr_expr <- curr_expr[row_order, expr_col_order]
+    curr_expr <- curr_expr[row_order, col_order]
     
     colnames(curr_sim) <- NULL
     colnames(curr_expr) <- NULL
