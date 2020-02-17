@@ -46,7 +46,7 @@ plotPhiDensities <- function(phis, file_path, start_index, eff_n_iter,
       )
 
       # As R does not maintain type when subsetting a data.frame of width 1
-      if (ncol(phis[[i]] == 1)) {
+      if (ncol(phis[[i]]) == 1) {
         ggplot2::ggplot(
           data = data.frame(Phi_12 = phis[[i]][start_index:eff_n_iter, ]),
           ggplot2::aes_string(x = curr_phi)
