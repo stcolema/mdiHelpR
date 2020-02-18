@@ -10,8 +10,10 @@ heatmapWrapperPSMDataCorr <- function(sim_mat,
                                       save_name = NULL,
                                       col_pal_sim = grDevices::colorRampPalette(c("#FF9900", "white", "#146EB4"))(100),
                                       col_pal_expr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
+                                      col_pal_corr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
                                       expr_breaks = NULL,
                                       sim_breaks = NULL,
+                                      corr_breaks = NULL,
                                       font_size = 20,
                                       expr_col_order = TRUE,
                                       show_row_labels = FALSE) {
@@ -21,6 +23,10 @@ heatmapWrapperPSMDataCorr <- function(sim_mat,
   
   if (is.null(sim_breaks)){
     sim_breaks <- defineBreaks(col_pal_sim)
+  }
+
+  if(is.null(corr_breaks)){
+    corr_breaks <- defineBreaks(col_pal_corr)
   }
   
   # This is an inefficient method as we are only interested in the clustering
@@ -63,8 +69,10 @@ heatmapWrapperPSMDataCorr <- function(sim_mat,
                               main = ph_title,
                               col_pal_sim = col_pal_sim,
                               col_pal_expr = col_pal_expr,
+                              col_pal_corr = col_pal_corr,
                               expr_breaks = expr_breaks,
                               sim_breaks = sim_breaks,
+                              corr_breaks = corr_breaks,
                               font_size = font_size,
                               show_row_labels = show_row_labels
                               

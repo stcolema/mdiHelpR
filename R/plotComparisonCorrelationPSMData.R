@@ -10,8 +10,10 @@ plotComparisonCorrelationPSMData <- function(compare_tibble,
                                              gen_title = "Comparison of clustering, gene expression data and data correlation",
                                              col_pal_sim = grDevices::colorRampPalette(c("#FF9900", "white", "#146EB4"))(100),
                                              col_pal_expr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
+                                             col_pal_corr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
                                              sim_breaks = NULL,
                                              expr_breaks = NULL,
+                                             corr_breaks = NULL,
                                              show_row_labels = FALSE) {
   if (is.null(expr_breaks)) {
     expr_breaks <- defineBreaks(col_pal_expr)
@@ -19,6 +21,10 @@ plotComparisonCorrelationPSMData <- function(compare_tibble,
 
   if (is.null(sim_breaks)) {
     sim_breaks <- defineBreaks(col_pal_sim)
+  }
+  
+  if(is.null(corr_breaks)){
+    corr_breaks <- defineBreaks(col_pal_corr)
   }
 
   # The directory we will save the plots to
@@ -52,6 +58,7 @@ plotComparisonCorrelationPSMData <- function(compare_tibble,
       save_name = comp_plot_name,
       col_pal_sim = col_pal_sim,
       col_pal_expr = col_pal_expr,
+      col_pal_corr = col_pal_expr,
       expr_breaks = expr_breaks,
       sim_breaks = sim_breaks
     )

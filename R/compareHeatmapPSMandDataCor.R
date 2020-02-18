@@ -7,8 +7,10 @@ compareHeatmapPSMandDataCor <- function(...,
                                         main = "compare_heatmaps",
                                         col_pal_sim = grDevices::colorRampPalette(c("#FF9900", "white", "#146EB4"))(100),
                                         col_pal_expr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
+                                        col_pal_corr = grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
                                         expr_breaks = NULL,
                                         sim_breaks = NULL,
+                                        corr_breaks = NULL,
                                         font_size = 20,
                                         show_row_labels = FALSE,
                                         show_col_labels = FALSE) {
@@ -18,6 +20,10 @@ compareHeatmapPSMandDataCor <- function(...,
   
   if (is.null(sim_breaks)){
     sim_breaks <- defineBreaks(col_pal_sim)
+  }
+
+  if(is.null(corr_breaks)){
+    corr_breaks <- defineBreaks(col_pal_corr)
   }
 
   # Contain ellipsis (...) in a list and find its length
@@ -49,8 +55,8 @@ compareHeatmapPSMandDataCor <- function(...,
   ph_list[[3]] <- pheatmap::pheatmap(data_to_compare[[3]],
     cluster_rows = F,
     cluster_cols = F,
-    color = col_pal_expr,
-    breaks = expr_breaks,
+    color = col_pal_corr,
+    breaks = corr_breaks,
     show_rownames = show_row_labels,
     show_colnames = show_col_labels,
     silent = TRUE
