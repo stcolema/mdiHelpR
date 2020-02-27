@@ -4,8 +4,20 @@
 \alias{defineBreaks}
 \title{defineBreaks}
 \usage{
-defineBreaks(col_pal, lb = -1, ub = 1)
+defineBreaks(col_pal, lb = -1, ub = 1, mid_point = 0.5 * (lb + ub))
+}
+\arguments{
+\item{col_pal}{A colour palette (of at least 4 entries)}
+
+\item{lb}{The lower bound for the breaks (i.e. the minimum value that will be 
+shown in the heatmap).}
+
+\item{ub}{The upper bound on displayed values in the heatmap.}
+
+\item{mid_point}{The mid point on the values for the pheatmap (defaults to 
+the mean of ``lb`` and ``ub``).}
 }
 \description{
-defineBreaks
+Defines breaks as an input for ``pheatmap`` for a given colour 
+palette (to be used as the ``color`` input in ``pheatmap``).
 }

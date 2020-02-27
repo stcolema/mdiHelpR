@@ -13,8 +13,10 @@ plotComparisonCorrelationPSMData(
   gen_title = "Comparison of clustering, gene expression data and data correlation",
   col_pal_sim = (grDevices::colorRampPalette(c("#FF9900", "white", "#146EB4")))(100),
   col_pal_expr = (grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900")))(100),
+  col_pal_corr = (grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900")))(100),
   sim_breaks = NULL,
   expr_breaks = NULL,
+  corr_breaks = NULL,
   show_row_labels = FALSE
 )
 }

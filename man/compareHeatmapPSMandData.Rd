@@ -14,7 +14,9 @@ compareHeatmapPSMandData(
   expr_breaks = NULL,
   sim_breaks = NULL,
   show_row_labels = FALSE,
-  show_col_labels = FALSE
+  show_col_labels = FALSE,
+  annotation_row = NA,
+  annotation_colours = NA
 )
 }
 \description{

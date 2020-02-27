@@ -13,7 +13,9 @@ compareHeatmapPSMandDataCor <- function(...,
                                         corr_breaks = NULL,
                                         font_size = 20,
                                         show_row_labels = FALSE,
-                                        show_col_labels = FALSE) {
+                                        show_col_labels = FALSE,
+                                        annotation_row = NA,
+                                        annotation_colours = NA){
   if (is.null(expr_breaks)) {
     expr_breaks <- defineBreaks(col_pal_expr)
   }
@@ -39,7 +41,9 @@ compareHeatmapPSMandDataCor <- function(...,
     breaks = sim_breaks,
     show_rownames = show_row_labels,
     show_colnames = show_col_labels,
-    silent = TRUE
+    silent = TRUE,
+    annotation_row = annotation_row,
+    annotation_colors = annotation_colours
   )$gtable
 
   ph_list[[2]] <- pheatmap::pheatmap(data_to_compare[[2]],

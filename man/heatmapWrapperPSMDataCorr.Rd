@@ -12,8 +12,10 @@ heatmapWrapperPSMDataCorr(
   save_name = NULL,
   col_pal_sim = (grDevices::colorRampPalette(c("#FF9900", "white", "#146EB4")))(100),
   col_pal_expr = (grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900")))(100),
+  col_pal_corr = (grDevices::colorRampPalette(c("#146EB4", "white", "#FF9900")))(100),
   expr_breaks = NULL,
   sim_breaks = NULL,
+  corr_breaks = NULL,
   font_size = 20,
   expr_col_order = TRUE,
   show_row_labels = FALSE

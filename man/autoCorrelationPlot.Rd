@@ -4,14 +4,20 @@
 \alias{autoCorrelationPlot}
 \title{Auto-correlation plot}
 \usage{
-autoCorrelationPlot(x, plot_title, lag_max = NULL, facet = FALSE)
+autoCorrelationPlot(
+  x,
+  plot_title = "autocorrelation",
+  lag_max = NULL,
+  facet = FALSE,
+  threshold_line_colour = "grey"
+)
 }
 \arguments{
 \item{x}{An mcmc chain.}
 
 \item{plot_title}{The plot title.}
 
-\item{lag_max}{The maximum lag for which to calculate auto-correlation. 
+\item{lag_max}{The maximum lag for which to calculate auto-correlation.
 Defaults to 50.}
 
 \item{facet}{A logical instructing the plotting of the autocorrelaiton plots
@@ -19,7 +25,7 @@ of the parameters as facetted upon parameter or else combined in one plot and
 separated by colour.}
 }
 \value{
-A plot of the auto-correlation for each parameter in x over a number 
+A plot of the auto-correlation for each parameter in x over a number
 of lag values.
 }
 \description{
