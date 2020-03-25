@@ -4,7 +4,7 @@
 \alias{pcaPlot}
 \title{PCA plot}
 \usage{
-pcaPlot(x, labels, n_comp = 10)
+pcaPlot(x, labels = NA, n_comp = 10)
 }
 \arguments{
 \item{x}{A matrix of the loadings of each item upon each component (the "x" 
