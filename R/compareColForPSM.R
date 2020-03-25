@@ -4,6 +4,7 @@
 
 # Compare the ith column of a data.table to the [i+1,...,n]th columns
 #' @title Compare col for PSM
+#' @importFrom data.table as.data.table
 compareColForPSM <- function(i, my_dt){
   
   # The column of interest
@@ -20,7 +21,7 @@ compareColForPSM <- function(i, my_dt){
   # The indices of the columns to drop
   drop <- 1:i
   
-  # A fill to ensure the output is the same lenght for every column (possibly
+  # A fill to ensure the output is the same length for every column (possibly
   # unnecessary)
   fill <- rep(0, i)
   
@@ -34,7 +35,7 @@ compareColForPSM <- function(i, my_dt){
   # y <- (x == my_dt[, -..drop]) %>% colSums()
 
   if(i == ncol(my_dt) - 1){
-    y <- (x == my_dt[, -drop]) %>% as.data.table() %>% colSums()
+    y <- (x == my_dt[, -drop]) %>% data.table::as.data.table() %>% colSums()
   } else {
     y <- (x == my_dt[, -drop]) %>% colSums()
   } 
