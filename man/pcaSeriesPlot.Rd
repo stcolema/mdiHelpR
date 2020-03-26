@@ -23,7 +23,7 @@ part of the prcomp() output).}
 
 \item{n_comp}{The number of components to plot.}
 
-\item{include_area}{Logical indicating inclusion of [quantile_1, quantile_3]
+\item{include_area}{Logical indicating inclusion of [quartile_1, quartile_3]
 about the median value of the clusters across components.}
 
 \item{ribbon_alpha}{The alpha used on the ribbon geom describing the range 
@@ -36,5 +36,7 @@ about the median of the clusters.}
 A ``ggplot2'' plot.
 }
 \description{
-Plot the items loadings along the principal components as a series.
+Plot the median loadings for each cluster along the principal
+components as a series, with an option to include a ribbon describing the 
+range from the first ot the third quartile around this.
 }

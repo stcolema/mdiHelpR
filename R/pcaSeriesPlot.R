@@ -1,12 +1,14 @@
 #!/usr/bin/env Rscript
 
 #' @title PCA series plot
-#' @description Plot the items loadings along the principal components as a series.
+#' @description Plot the median loadings for each cluster along the principal
+#' components as a series, with an option to include a ribbon describing the 
+#' range from the first ot the third quartile around this.
 #' @param x A matrix of the loadings of each item upon each component (the "x"
 #' part of the prcomp() output).
 #' @param labels A vector of the labels associated with the rows of x.
 #' @param n_comp The number of components to plot.
-#' @param include_area Logical indicating inclusion of [quantile_1, quantile_3]
+#' @param include_area Logical indicating inclusion of [quartile_1, quartile_3]
 #' about the median value of the clusters across components.
 #' @param ribbon_alpha The alpha used on the ribbon geom describing the range 
 #' about the median of the clusters.
