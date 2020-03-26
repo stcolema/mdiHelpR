@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-#' @title Generate complex dataset
+#' @title Generate simulation dataset
 #' @description Generates a dataset based upon a mixture of $K$ Gaussian 
 #' distributions with $p$ independent, relevant features and $p_n$ irrelevant 
 #' features.
@@ -15,7 +15,7 @@
 #' @return A list of `data` (a data.frame of the generated data) and
 #' `cluster_IDs` (a vector of the cluster membership of each item).
 #' @export
-generateComplexDataset <- function(K, n, p,
+generateSimulationDataset <- function(K, n, p,
                                 delta_mu = 1,
                                 cluster_sd = 1,
                                 pi = rep(1/K, K),
@@ -56,7 +56,7 @@ generateComplexDataset <- function(K, n, p,
   
   # Generate signal-bearing data if any relevant features are present
   if (p > 0) {
-    my_data <- generateDataset(cluster_means, cluster_sds, n, p, pi)
+    my_data <- generateGaussianDataset(cluster_means, cluster_sds, n, p, pi)
     data_sd <- sd(my_data$data)
   }
   

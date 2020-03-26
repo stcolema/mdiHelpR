@@ -7,7 +7,7 @@
 pcaPlot(x, labels = NA, n_comp = 10)
 }
 \arguments{
-\item{x}{A matrix of the loadings of each item upon each component (the "x" 
+\item{x}{A matrix of the loadings of each item upon each component (the "x"
 part of the prcomp() output).}
 
 \item{labels}{A vector of the labels associated with the rows of x.}
