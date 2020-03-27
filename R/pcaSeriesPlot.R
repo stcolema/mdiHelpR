@@ -61,7 +61,8 @@ pcaSeriesPlot <- function(x, labels,
           fill = Cluster
         ),
         alpha = ribbon_alpha,
-        lty = ribbon_lty
+        lty = ribbon_lty,
+        colour = NA
       )
   }
 

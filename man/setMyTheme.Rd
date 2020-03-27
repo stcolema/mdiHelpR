@@ -4,7 +4,10 @@
 \alias{setMyTheme}
 \title{Set my theme}
 \usage{
-setMyTheme()
+setMyTheme(...)
+}
+\arguments{
+\item{...}{Arguments to pass to theme_bw().}
 }
 \description{
 Set the theme I personally use for slides and whatnot. This is
