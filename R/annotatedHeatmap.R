@@ -10,6 +10,7 @@
 #' @param my_breaks The breaks to use within the heatmap.
 #' @param ... Other arguments to pass to ``pheatmap``.
 #' @importFrom pheatmap pheatmap
+#' @importFrom viridis viridis
 #' @export
 annotatedHeatmap <- function(x, cluster_IDs,
                              col_pal = colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
@@ -25,7 +26,7 @@ annotatedHeatmap <- function(x, cluster_IDs,
   K <- length(unique(cluster_IDs))
 
   # Create the annotation colours
-  ann_colours <- list(Cluster = viridis(K) %>%
+  ann_colours <- list(Cluster = viridis::viridis(K) %>%
     set_names(paste("Cluster", sort(unique(cluster_IDs)))))
 
   # Create the heatmap
