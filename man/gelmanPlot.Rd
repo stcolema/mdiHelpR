@@ -11,8 +11,8 @@ gelmanPlot(
   transform = FALSE,
   autoburnin = TRUE,
   auto.layout = TRUE,
-  xlab = "last iteration in chain",
-  ylab = "shrink factor",
+  xlab = "Last iteration in chain",
+  ylab = "Shrinkage factor",
   title = "Gelman-Rubin diagnostic plot"
 )
 }

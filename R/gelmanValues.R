@@ -9,6 +9,7 @@ gelmanValues <- function(x,
                          confidence = 0.95,
                          transform = FALSE,
                          autoburnin = TRUE) {
+  
   n_bins <- min(floor((coda::niter(x) - 50) / coda::thin(x)), max_bins)
   
   if (n_bins < 1) {
@@ -42,10 +43,10 @@ gelmanValues <- function(x,
   # Calculate the shrinkage factor for each bin of iterations
   for (i in 1:(n_bins + 1)) {
     shrink[i, , ] <- coda::gelman.diag(stats::window(x, end = last_iter_vec[i]),
-                                 confidence = confidence,
-                                 transform = transform,
-                                 autoburnin = autoburnin,
-                                 multivariate = FALSE
+      confidence = confidence,
+      transform = transform,
+      autoburnin = autoburnin,
+      multivariate = FALSE
     )$psrf
   }
   
