@@ -56,7 +56,7 @@ generateSimulationDataset <- function(K, n, p,
   
   # Generate signal-bearing data if any relevant features are present
   if (p > 0) {
-    my_data <- generateGaussianDataset(cluster_means, cluster_sds, n, p, pi)
+    my_data <- generateGaussianDataset(cluster_means, cluster_sd, n, p, pi)
     data_sd <- sd(my_data$data)
   }
   

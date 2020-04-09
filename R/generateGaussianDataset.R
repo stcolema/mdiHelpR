@@ -26,35 +26,35 @@ generateGaussianDataset <- function(cluster_means, std_dev, n, p, pi,
   my_data <- matrix(nrow = n, ncol = p)
   
   # Sample the cluster mean order over the p columns
-  reordered_cluster_means <- lapply(1:p, function(x){sample(cluster_means)}) %>% 
-    unlist() %>% 
-    matrix(ncol = p, nrow = K, byrow = F)
-  
-  # Create a N x P matrix of the cluster means associated with each item
-  component_struc <- reordered_cluster_means[cluster_IDs, ]
-  
-  # Sample from the normal distributions associated with each item
-  my_data <- component_struc %>% 
-    apply(2, function(x){MASS::mvrnorm(1, mu = x, diag(1, nrow = n))})
-  
-  # for(i in 1:n){
-  #   my_data[i, ] <- reordered_cluster_means[cluster_IDs[i], ] %>% 
-  #     lapply(function(x){rnorm(p, mean = x, sd = std_dev)}) 
+  # reordered_cluster_means <- lapply(1:p, function(x){sample(cluster_means)}) %>% 
+  #   unlist() %>% 
+  #   matrix(ncol = p, nrow = K, byrow = F)
   # 
-  # # Iterate over each of the columns permuting the means associated with each
-  # # label.
-  # for (j in 1:p)
-  # {
-  #   reordered_cluster_means <- sample(cluster_means)
-  #   
-  #   # Draw n points from the K univariate Gaussians defined by the permuted means.
-  #   for (i in 1:n) {
-  #     my_data[i, j] <- rnorm(1,
-  #                            mean = reordered_cluster_means[cluster_IDs[i]],
-  #                            sd = std_dev
-  #     )
-  #   }
-  # }
+  # # Create a N x P matrix of the cluster means associated with each item
+  # component_struc <- reordered_cluster_means[cluster_IDs, ]
+  # 
+  # # Sample from the normal distributions associated with each item
+  # my_data <- component_struc %>% 
+  #   apply(2, function(x){MASS::mvrnorm(1, mu = x, diag(1, nrow = n))})
+  # 
+  # for(i in 1:n){
+  #   my_data[i, ] <- reordered_cluster_means[cluster_IDs[i], ] %>%
+  #     lapply(function(x){rnorm(p, mean = x, sd = std_dev)})
+
+  # Iterate over each of the columns permuting the means associated with each
+  # label.
+  for (j in 1:p)
+  {
+    reordered_cluster_means <- sample(cluster_means)
+
+    # Draw n points from the K univariate Gaussians defined by the permuted means.
+    for (i in 1:n) {
+      my_data[i, j] <- rnorm(1,
+                             mean = reordered_cluster_means[cluster_IDs[i]],
+                             sd = std_dev
+      )
+    }
+  }
   
   # Order based upon allocation label
   row_order <- order(cluster_IDs)
