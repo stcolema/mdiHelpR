@@ -34,10 +34,11 @@ gewekePlot <- function(x,
   x <- coda::as.mcmc.list(x)
   
   # The vector of start iterations to calculate the Geweke statistic for
-  start_iter_vec <- seq(
+  start_iter_vec <- floor(seq(
     from = stats::start(x),
     to = (stats::start(x) + stats::end(x)) / 2,
     length = n_bins
+  )
   )
   
   # The matrix that will hold the Geweke stat
