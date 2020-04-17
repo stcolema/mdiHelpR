@@ -10,7 +10,11 @@ gelmanValues <- function(x,
                          transform = FALSE,
                          autoburnin = TRUE) {
   
-  n_bins <- min(floor((coda::niter(x) - 50) / coda::thin(x)), max_bins)
+  # Calculate the number of iterations in the chain (as coda::niter seems not to
+  # work)
+  n_iter <- stats::end(x) - stats::start(x)
+  
+  n_bins <- min(floor((n_iter - 50) / coda::thin(x)), max_bins)
   
   if (n_bins < 1) {
     stop("Insufficient iterations to produce Gelman-Rubin plot")
