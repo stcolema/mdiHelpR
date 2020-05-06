@@ -1,10 +1,12 @@
+#!/usr/bin/env Rscript
 
-# Imported from ``pheatmap``
+#' @title Draw legend
+#' @importFrom grid grid.pretty rectGrob textGrob grobTree gpar
 draw_legend = function(color, breaks, ...){
   color = color[!is.infinite(breaks)]
   breaks = breaks[!is.infinite(breaks)]
   
-  legend <- grid.pretty(range(as.vector(breaks)))
+  legend <- grid::grid.pretty(range(as.vector(breaks)))
   names(legend) <- legend
   
   height = min(unit(1, "npc"), unit(150, "bigpts"))
@@ -17,10 +19,10 @@ draw_legend = function(color, breaks, ...){
   
   h = breaks[-1] - breaks[-length(breaks)]
   
-  rect = rectGrob(x = 0, y = breaks[-length(breaks)], width = unit(10, "bigpts"), height = h, hjust = 0, vjust = 0, gp = gpar(fill = color, col = "#FFFFFF00"))
-  text = textGrob(names(legend), x = unit(14, "bigpts"), y = legend_pos, hjust = 0, gp = gpar(...))
+  rect = grid::rectGrob(x = 0, y = breaks[-length(breaks)], width = unit(10, "bigpts"), height = h, hjust = 0, vjust = 0, gp = grid::gpar(fill = color, col = "#FFFFFF00"))
+  text = grid::textGrob(names(legend), x = unit(14, "bigpts"), y = legend_pos, hjust = 0, gp = grid::gpar(...))
   
-  res = grobTree(rect, text)
+  res = grid::grobTree(rect, text)
   
   return(res)
 }

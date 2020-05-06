@@ -39,7 +39,7 @@
 #' @importFrom patchwork plot_annotation
 #' @export
 compareMatricesGen <- function(...,
-                               m_list = NULL,
+                               matrices = NULL,
                                col_pal = NULL,
                                breaks = NULL,
                                order_rows = T,
