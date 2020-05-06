@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 
 #' @title Compare matrices
-#' @description Creates a plot with the heatmaps of m_1 and m_2 side by side.
+#' @description Creates a plot with the heatmaps of matrices in a grid.
 #' There is an option to order the matrices based on the ordering imposed upon
-#' m_1 by hclust.
+#' the first matrix given.
 #' @param ... A number of matrices.
 #' @param matrices If matrices are not given in ``...``, a list of matrices to
 #' be heatmapped.
@@ -39,7 +39,7 @@
 #' @importFrom patchwork plot_annotation
 #' @export
 compareMatricesGen <- function(...,
-                               matrices = NULL,
+                               m_list = NULL,
                                col_pal = NULL,
                                breaks = NULL,
                                order_rows = T,
@@ -54,7 +54,7 @@ compareMatricesGen <- function(...,
                                title = NULL) {
 
   # Pass ellipses to a list and save some frequently used aspects
-  if (!is.null(matrices)) {
+  if (is.null(matrices)) {
     matrices <- list(...)
   }
   n_matrices <- length(matrices)

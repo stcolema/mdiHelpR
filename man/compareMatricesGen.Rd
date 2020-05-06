@@ -6,7 +6,7 @@
 \usage{
 compareMatricesGen(
   ...,
-  matrices = NULL,
+  m_list = NULL,
   col_pal = NULL,
   breaks = NULL,
   order_rows = T,
@@ -17,24 +17,21 @@ compareMatricesGen(
   distance = "euclidean",
   show_rownames = F,
   show_colnames = F,
-  collect_legend = F,
+  collect_legend = T,
   title = NULL
 )
 }
 \arguments{
 \item{...}{A number of matrices.}
 
-\item{matrices}{If matrices are not given in ``...``, a list of matrices to
-be heatmapped.}
-
-\item{col_pal}{The colour palette for the heatmaps. If a single vector of 
-colours, then all heatmaps share the same colour palette, but the user may 
-give a vector of palettes corresponding to each matrix passed to the 
+\item{col_pal}{The colour palette for the heatmaps. If a single vector of
+colours, then all heatmaps share the same colour palette, but the user may
+give a vector of palettes corresponding to each matrix passed to the
 function. If ``NULL``, ``,diHelpR::defineColPal`` is called.}
 
 \item{breaks}{Similarly to ``col_pal``, a vector of breaks for the heatmaps,
 either a single vector to be used by all or else a list corresponding to the
-matrices passed to the function. Defaults to 
+matrices passed to the function. Defaults to
 ``mdiHelpR::defineDataBreaks(m1, col_pal)`` where ``m1`` is the first matrix
 passed to the function.}
 
@@ -42,13 +39,13 @@ passed to the function.}
 matrices based upon the ordering imposed by hclust on the first.}
 
 \item{order_cols}{A logical instructing the function to order the columns all
-matrices based upon the ordering imposed by hclust on the columns of the 
+matrices based upon the ordering imposed by hclust on the columns of the
 first.}
 
-\item{method}{The linkage method used in imposing the ordering of rows and 
+\item{method}{The linkage method used in imposing the ordering of rows and
 columns. Defaults to "complete".}
 
-\item{distance}{The distance measure used in imposing the ordering of rows and 
+\item{distance}{The distance measure used in imposing the ordering of rows and
 columns. Defaults to "euclidean".}
 
 \item{show_rownames}{A logical instructing inclusion of row names in the
@@ -62,11 +59,14 @@ heatmaps (default is FALSE).}
 
 \item{title}{The title of the final grid of plots.}
 
+\item{matrices}{If matrices are not given in ``...``, a list of matrices to
+be heatmapped.}
+
 \item{col_names}{A logical instructing inclusion of column names in the
 heatmaps (default is TRUE).}
 }
 \description{
-Creates a plot with the heatmaps of m_1 and m_2 side by side.
+Creates a plot with the heatmaps of matrices in a grid.
 There is an option to order the matrices based on the ordering imposed upon
-m_1 by hclust.
+the first matrix given.
 }
