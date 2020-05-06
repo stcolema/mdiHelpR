@@ -4,10 +4,14 @@
 \alias{findOrder}
 \title{Find order}
 \usage{
-findOrder(m)
+findOrder(m, method = "complete", distance = "euclidean")
 }
 \arguments{
 \item{m}{A matrix.}
+
+\item{method}{The linkage method used by ``hclust``.}
+
+\item{distance}{The metric used by ``dist``.}
 }
 \value{
 A vector of integers corresponding to the row numbers of an ordered m.
