@@ -23,6 +23,10 @@
 #' @param order_cols A logical instructing the function to order the columns all
 #' matrices based upon the ordering imposed by hclust on the columns of the
 #' first.
+#' @param row_order A vector of indices of the order of rows in the matrices. 
+#' If ``NULL`` then row order is taken from the first matrix given.
+#' @param order_cols A vector of indices of the order of columns in the matrices. 
+#' If ``NULL`` then column order is taken from the first matrix given.
 #' @param method The linkage method used in imposing the ordering of rows and
 #' columns. Defaults to "complete".
 #' @param distance The distance measure used in imposing the ordering of rows and
@@ -32,7 +36,7 @@
 #' @param show_colnames A logical instructing inclusion of column names in the
 #' heatmaps (default is FALSE).
 #' @param collect_legend Instruction to hide legend on all heatmaps and gather
-#' (assumed) common legend to the left of the plots.
+#' (assumed) common legend to the right of the plots.
 #' @param title The title of the final grid of plots.
 #' @importFrom cowplot plot_grid draw_grob
 #' @importFrom pheatmap pheatmap
@@ -50,7 +54,7 @@ compareMatricesGen <- function(...,
                                distance = "euclidean",
                                show_rownames = F,
                                show_colnames = F,
-                               collect_legend = T,
+                               collect_legend = F,
                                title = NULL) {
 
   # Pass ellipses to a list and save some frequently used aspects
@@ -68,7 +72,7 @@ compareMatricesGen <- function(...,
   # choose sensible numbers, defaulting to a square grid
   if (is.null(n_row) & is.null(n_col)) {
     n_row <- floor(sqrt(n_matrices))
-    n_col <- ceiling(sqrt(n_matrices))
+    n_col <- ceiling(n_matrices / n_row)
   }
 
   if (is.null(n_row)) {
@@ -79,23 +83,6 @@ compareMatricesGen <- function(...,
     n_col <- ceiling(n_matrices / n_row)
   }
 
-  # Re order the matrices to have a common row order
-  if (order_rows) {
-    row_order <- findOrder(m1, method = method, distance = distance)
-
-    for (i in 1:n_matrices) {
-      matrices[[i]] <- matrices[[i]][row_order, ]
-    }
-  }
-
-  if (order_cols) {
-    col_order <- findOrder(t(m1), method = method, distance = distance)
-
-    for (i in 1:n_matrices) {
-      matrices[[i]] <- matrices[[i]][, col_order]
-    }
-  }
-
   # If no colour palettes or breaks given, make some and each identical for each
   # matrix
   if (is.null(col_pal)) {
@@ -103,7 +90,10 @@ compareMatricesGen <- function(...,
   }
 
   if (is.null(breaks)) {
-    breaks <- defineDataBreaks(m1, col_pal)
+    breaks <- list()
+    for(i in 1:n_matrices){
+      breaks[[i]] <- defineDataBreaks(matrices[[i]], col_pal)
+    }
   }
 
   if (!is.list(col_pal)) {
@@ -120,8 +110,8 @@ compareMatricesGen <- function(...,
 
   for (i in 1:n_matrices) {
     ph_list[[i]] <- pheatmap::pheatmap(matrices[[i]],
-      cluster_rows = F,
-      cluster_cols = F,
+      cluster_rows = order_rows,
+      cluster_cols = order_cols,
       color = col_pal[[i]],
       breaks = breaks[[i]],
       show_rownames = show_rownames,
@@ -141,11 +131,16 @@ compareMatricesGen <- function(...,
 
   # Plot a grid of heatmaps
   p_grid <- cowplot::plot_grid(plotlist = ph_list, nrow = n_row, ncol = n_col)
-
+  
+  # Add some white space at the bottom of the plots
+  p_grid <- cowplot::plot_grid(p_grid, NULL, nrow = 2, ncol = 1, rel_heights = c(10,1))
+  
   # If only one legend is necessary
   if (collect_legend) {
-    p_grid <- cowplot::plot_grid(p_grid, NULL, rel_widths = c(10, 1))
-    p_grid <- p_grid + cowplot::draw_grob(legend_grob, x = 0.925, y = -0.25)
+    p_legend <- ggplot() + cowplot::draw_grob(legend_grob) + theme_minimal()
+    p_grid <- cowplot::plot_grid(p_grid, p_legend, rel_widths = c(10, 1))
+    
+    # p_grid <- p_grid + cowplot::draw_grob(legend_grob, x = 0.925, y = -0.25)
   }
 
   # Add a title using patchwork if given
