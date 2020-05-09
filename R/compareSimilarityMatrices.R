@@ -80,10 +80,6 @@ compareSimilarityMatrices <- function(...,
   n_matrices <- length(matrices)
   m_star <- matrices[[matrix_imposing_order]]
 
-  if (n_matrices > 9) {
-    warning("The number of matrices given is quite large and probably will be cramped.")
-  }
-
   # Re order the matrices to have a common row order
   if (order_rows) {
     if (is.null(row_order)) {
@@ -112,7 +108,7 @@ compareSimilarityMatrices <- function(...,
   }
 
   if (is.null(breaks)) {
-    breaks <- defineBreaks(m_star, col_pal,
+    breaks <- defineBreaks(col_pal,
       lb = lb,
       ub = ub,
       mid_point = mid_point
