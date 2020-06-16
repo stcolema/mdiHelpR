@@ -31,3 +31,19 @@ createSimilarityMat <- function(cluster_record) {
     .Call(`_mdiHelpR_createSimilarityMat`, cluster_record)
 }
 
+#' @title Quick PSM
+#' @description Constructs a similarity matrix trying assuming that there are 
+#' a small number of modes. This function is intended to be more clever in
+#' calculating the PSM, relying upon the poor quality exploration of many MCMC
+#' samplers. It probably is not a good idea in low dimensions.
+#' 
+#' @param partitions Matrix of label assignment for data across iterations.
+#' 
+#' @return A symmetric n x n matrix (for n rows in cluster record) describing 
+#' the fraction of iterations for which each pairwise combination of points are
+#' assigned the same label.
+#' @export
+quickPSM <- function(partitions) {
+    .Call(`_mdiHelpR_quickPSM`, partitions)
+}
+
