@@ -43,7 +43,7 @@ createSimilarityMat <- function(cluster_record) {
 #' the fraction of iterations for which each pairwise combination of points are
 #' assigned the same label.
 #' @export
-quickPSM <- function(partitions) {
-    .Call(`_mdiHelpR_quickPSM`, partitions)
+quickPSM <- function(partitions, tol = 0.001) {
+    .Call(`_mdiHelpR_quickPSM`, partitions, tol)
 }
 

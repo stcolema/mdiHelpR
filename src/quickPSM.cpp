@@ -17,7 +17,7 @@ using namespace Rcpp ;
 //' assigned the same label.
 //' @export
 // [[Rcpp::export]]
-arma::mat quickPSM(arma::umat partitions){
+arma::mat quickPSM(arma::umat partitions, double tol = 0.001){
   
   // Initialise everything
   double entry = 0.0;                             // Hold current value
@@ -25,6 +25,7 @@ arma::mat quickPSM(arma::umat partitions){
   arma::uword R = partitions.n_rows;              // Number of MCMC samples taken
   arma::mat psm = arma::zeros<arma::mat>(N, N);    // Output similarity matrix 
   arma::umat id = arma::zeros<arma::umat>(N, N);  // Matrix recording identical items
+  double threshold = (1 - tol) * R;
   
   // Assign diagonal values
   psm.diag() += (double)R;
@@ -48,7 +49,7 @@ arma::mat quickPSM(arma::umat partitions){
 
       // If the score is equal to N (the maximum value) than the two items
       // will have identical entries for all entries in the PSM
-      if (entry == R) {
+      if (entry == threshold) {
         id(i, j) = 1;
         id(j, i) = 1;
       }
@@ -59,11 +60,13 @@ arma::mat quickPSM(arma::umat partitions){
       
     }
     
-    // Find which items are now known to be identical to the ith item
-    arma::uvec id_members = find(id.col(i));
+    if(sum(id.col(i) > 0)) {
+      // Find which items are now known to be identical to the ith item
+      arma::uvec id_members = find(id.col(i));
 
-    // Update the PSM entries to be the same for all of these entries
-    psm.each_col(id_members) = psm.col(i);
+      // Update the PSM entries to be the same for all of these entries
+      psm.each_col(id_members) = psm.col(i);
+    }
 
   }
  
