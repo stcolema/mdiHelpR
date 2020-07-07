@@ -5,7 +5,10 @@ Version: 1.0
 Date: 2020-03-09
 Author: Stephen Coleman
 Maintainer: Stephen Coleman <stcolema@tcd.ie>
-Description: More details about what the package does. See
+Description: This package contains functions to aid Bayesian clustering. 
+            Several of the functions rely entriely upon other packages, 
+            most noticeably ``coda`` (MCMC diagnostics) and ``pheatmap``
+            (heatmaps). More details about what the package does. See
             <http://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file> for details
             on how to write this part.
 License: GPL (>= 2)
