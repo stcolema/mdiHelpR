@@ -28,7 +28,7 @@ arma::mat createSimilarityMat(arma::umat cluster_record){
   // entry
   for (arma::uword i = 0; i < N - 1; i++){ 
     for (arma::uword j = i + 1; j < N; j++){
-      entry = calcItemSimilarity(i, j, cluster_record, n_iter);
+      entry = (double)sum(cluster_record.col(i) == cluster_record.col(j)) / n_iter ; // calcItemSimilarity(i, j, cluster_record, n_iter);
       out(i, j) = entry;
       out(j, i) = entry;
     }

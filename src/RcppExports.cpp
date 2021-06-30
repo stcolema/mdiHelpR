@@ -17,9 +17,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// quickPSM
+arma::mat quickPSM(arma::umat partitions, double tol);
+RcppExport SEXP _mdiHelpR_quickPSM(SEXP partitionsSEXP, SEXP tolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::umat >::type partitions(partitionsSEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    rcpp_result_gen = Rcpp::wrap(quickPSM(partitions, tol));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mdiHelpR_createSimilarityMat", (DL_FUNC) &_mdiHelpR_createSimilarityMat, 1},
+    {"_mdiHelpR_quickPSM", (DL_FUNC) &_mdiHelpR_quickPSM, 2},
     {NULL, NULL, 0}
 };
 
