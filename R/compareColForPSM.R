@@ -12,9 +12,9 @@ compareColForPSM <- function(i, my_dt){
   # print(str(my_dt[, i]))
   # print(str(my_dt[, ..i]))
   
-  # x <- my_dt[, ..i] %>% c() %>% unlist()
-  x <- my_dt[, i] %>% c() %>% unlist()
-  # x1 <- my_dt[, 1] %>% c() %>% unlist()
+  # x <- my_dt[, ..i] |> c() |> unlist()
+  x <- my_dt[, i] |> c() |> unlist()
+  # x1 <- my_dt[, 1] |> c() |> unlist()
   
   # print(str(x == x1))
   
@@ -32,12 +32,12 @@ compareColForPSM <- function(i, my_dt){
   # print(str(my_dt[, -drop]))
   # print(str(my_dt[, -..drop]))
   
-  # y <- (x == my_dt[, -..drop]) %>% colSums()
+  # y <- (x == my_dt[, -..drop]) |> colSums()
 
   if(i == ncol(my_dt) - 1){
-    y <- (x == my_dt[, -drop]) %>% data.table::as.data.table() %>% colSums()
+    y <- (x == my_dt[, -drop]) |> data.table::as.data.table() |> colSums()
   } else {
-    y <- (x == my_dt[, -drop]) %>% colSums()
+    y <- (x == my_dt[, -drop]) |> colSums()
   } 
   
   # Fill with 0s

@@ -28,8 +28,8 @@ autoCorrelationPlot <- function(x,
   x <- coda::mcmc.list(x)
 
   # Consider the chain as a time series and calculate the auto-correlation
-  x_auto_cor <- x[[1]] %>%
-    stats::as.ts() %>%
+  x_auto_cor <- x[[1]] |>
+    stats::as.ts() |>
     stats::acf(lag.max = lag_max, plot = FALSE)
 
   # Create a data.frame to hold the autocorrelation info
