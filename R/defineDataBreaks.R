@@ -16,8 +16,8 @@ defineDataBreaks <- function(x, col_pal, mid_point = NULL) {
   if (is.null(col_pal)) {
     col_pal <- dataColPal(n)
   }
-  lb <- min(x)
-  ub <- max(x)
+  lb <- min(x, na.rm = TRUE)
+  ub <- max(x, na.rm = TRUE)
   
   if(is.null(mid_point)){
     if(lb < 0 & ub > 0){

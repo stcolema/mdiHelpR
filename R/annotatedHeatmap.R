@@ -15,29 +15,28 @@
 #' @export
 annotatedHeatmap <- function(x, cluster_IDs,
                              col_pal = colorRampPalette(c("#146EB4", "white", "#FF9900"))(100),
-                             my_breaks = defineDataBreaks(x, col_pal, mid_point = 0),
-                             main = "gen_dataset",
+                             breaks = defineDataBreaks(x, col_pal),
+                             cluster_names = paste("Cluster", cluster_IDs),
                              ...) {
 
   # Create the annotation data.frame for the rows
-  anno_row <- data.frame(Cluster = factor(paste("Cluster", cluster_IDs))) %>%
+  anno_row <- data.frame(Cluster = factor(cluster_names)) |> 
     magrittr::set_rownames(rownames(x))
 
   # The number of cololurs to use
   K <- length(unique(cluster_IDs))
 
   # Create the annotation colours
-  ann_colours <- list(Cluster = viridis::viridis(K) %>%
-                        magrittr::set_names(paste("Cluster", sort(unique(cluster_IDs))))
-                      )
+  anno_colour_palette <- viridis::viridis(K)
+  names(anno_colour_palette) <- sort(unique(cluster_names))
+  ann_colours <- list(Cluster = anno_colour_palette)
 
   # Create the heatmap
   ph <- pheatmap::pheatmap(x,
     color = col_pal,
-    breaks = my_breaks,
+    breaks = breaks,
     annotation_row = anno_row,
     annotation_colors = ann_colours,
-    main = main,
     ...
   )
 

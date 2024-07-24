@@ -14,8 +14,15 @@
 #' the mean of ``lb`` and ``ub``).
 #' 
 #' @example defineBreaks(colorRampPalette(c("#146EB4", "white", "#FF9900"))(100), lb = -1, ub = 1, mid_point = 0)
-defineBreaks <- function(col_pal, lb = -1, ub = 1, mid_point = 0.5 * (lb + ub)){
+defineBreaks <- function(col_pal, lb = 0, ub = 1, mid_point = NULL){
   palette_length <- length(col_pal)
+  if(is.null(mid_point)){
+    if(lb < 0 & ub > 0){
+      mid_point <- 0
+    } else {
+      mid_point <- 0.5 * (lb + ub)
+    }
+  }
 
   breaks <- c(
     seq(lb, mid_point, length.out = ceiling(palette_length / 2) + 1),
